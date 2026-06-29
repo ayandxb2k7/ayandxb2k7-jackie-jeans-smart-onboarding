@@ -77,14 +77,10 @@ export function generateFitRecommendation(profile: FitProfile): FitRecommendatio
     'Zara': '28-34',
     'Gap': '28-36',
   };
-  let matchedBrands = Object.entries(brandFitMap)
-    .filter(([brand]) => profile.brands?.includes(brand))
+  const matchedBrands = Object.entries(brandFitMap)
+    .filter(([brand]) => profile.brands?.includes(brand) || true)
     .slice(0, 3)
     .map(([brand]) => brand);
-
-  if (matchedBrands.length === 0) {
-    matchedBrands = ['Levi\'s', 'Madewell', 'American Eagle'];
-  }
 
   // Tips
   const tips: string[] = [];
@@ -99,12 +95,6 @@ export function generateFitRecommendation(profile: FitProfile): FitRecommendatio
   }
   if (profile.frustration?.includes('Thigh Fit')) {
     tips.push('Look for "curvy fit" or "athletic fit" styles that are cut wider in the thigh.');
-  }
-  if (profile.brands?.length) {
-    tips.push(`We used your past brand history to calibrate this recommendation against ${profile.brands.length} brand${profile.brands.length > 1 ? 's' : ''}.`);
-  }
-  if (score >= 90) {
-    tips.push('Fit confidence is strongest because you provided key body measurements and brand history.');
   }
   if (tips.length === 0) {
     tips.push('Your measurements look great — you should have an easy time finding the right fit.');

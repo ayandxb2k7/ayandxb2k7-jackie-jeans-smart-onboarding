@@ -202,59 +202,6 @@ export function CompletionScreen({ profile, onRestart }: CompletionScreenProps) 
         </motion.div>
       )}
 
-
-      {/* Premium AI fit intelligence */}
-      {rec && (
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.62 }}
-          className="w-full max-w-sm mb-4"
-        >
-          <div className="premium-denim-card rounded-3xl p-4" style={{
-            background: 'linear-gradient(135deg, rgba(14,165,233,0.10), rgba(139,92,246,0.08), rgba(52,211,153,0.06))',
-            border: '1px solid rgba(14,165,233,0.24)'
-          }}>
-            <div className="relative z-10">
-              <div className="flex items-center justify-between mb-3">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--accent)' }}>
-                    AI Fit Intelligence
-                  </p>
-                  <h3 className="text-lg font-black" style={{ color: 'var(--text-primary)' }}>
-                    Confidence breakdown
-                  </h3>
-                </div>
-                <div className="px-3 py-1 rounded-full text-xs font-black" style={{
-                  color: rec.fitColor,
-                  background: 'rgba(255,255,255,0.06)',
-                  border: '1px solid rgba(255,255,255,0.10)'
-                }}>
-                  {rec.fitLabel}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 mb-3">
-                {[
-                  ['Waist', profile.waist ? 'High' : 'Est.'],
-                  ['Hip', profile.hips ? 'High' : 'Est.'],
-                  ['Length', profile.height ? 'High' : 'Est.'],
-                ].map(([label, value]) => (
-                  <div key={label} className="fit-metric-card p-3 text-center">
-                    <p className="text-sm font-black" style={{ color: 'var(--text-primary)' }}>{value}</p>
-                    <p className="text-[10px]" style={{ color: 'var(--text-secondary)' }}>{label}</p>
-                  </div>
-                ))}
-              </div>
-
-              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Jackie compares your measurements, rise preference, thigh fit and brand history to create a focused recommendation before handoff.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      )}
-
       {/* Profile summary */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

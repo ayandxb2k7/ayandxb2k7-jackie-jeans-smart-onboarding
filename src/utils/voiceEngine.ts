@@ -24,7 +24,7 @@ const PREFERRED_VOICES = [
   'Rishi',
 ];
 
-const ROBOTIC_VOICES = ['Microsoft David', 'Microsoft Zira', 'Microsoft Mark', 'Alex', 'Fred', 'Victoria', 'Whisper', 'Albert', 'Bad News'];
+const ROBOTIC_VOICES = ['Microsoft David', 'Microsoft Zira', 'Microsoft Mark', 'Alex', 'Fred', 'Victoria', 'Whisper'];
 
 let cachedVoice: SpeechSynthesisVoice | null = null;
 let voicesLoaded = false;
@@ -105,7 +105,7 @@ export function speak(
   window.speechSynthesis.cancel();
 
   const utterance = new SpeechSynthesisUtterance(text);
-  utterance.rate = 0.88;
+  utterance.rate = 0.92;
   utterance.pitch = 1.02;
   utterance.volume = 1;
   utterance.lang = 'en-US';
@@ -158,7 +158,7 @@ export class SpeechRecognitionEngine {
 
     this.callbacks = callbacks;
     this.recognition = new SpeechRecog();
-    this.recognition.continuous = false;
+    this.recognition.continuous = true;
     this.recognition.interimResults = true;
     this.recognition.maxAlternatives = 3;
     this.recognition.lang = 'en-US';
@@ -194,7 +194,7 @@ export class SpeechRecognitionEngine {
 
     this.recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
       if (event.error === 'no-speech') {
-        callbacks.onError('no-speech');
+        if (this.autoRestart) this.restart();
         return;
       }
       if (event.error === 'aborted') return;
